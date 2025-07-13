@@ -40,3 +40,24 @@
 2025-07-13 22:30:18,980 - ERROR - Training failed: Target modules {'k_proj', 'q_proj', 'o_proj', 'v_proj', 'up_proj', 'gate_proj', 'down_proj'} not found in the base model. Please check the target modules and try again.
 2025-07-13 22:30:18,980 - ERROR - 模型训练失败: Target modules {'k_proj', 'q_proj', 'o_proj', 'v_proj', 'up_proj', 'gate_proj', 'down_proj'} not found in the base model. Please check the target modules and try again.
 2025-07-13 22:30:18,980 - ERROR - 训练过程失败: Target modules {'k_proj', 'q_proj', 'o_proj', 'v_proj', 'up_proj', 'gate_proj', 'down_proj'} not found in the base model. Please check the target modules and try again.
+2025-07-13 23:27:50,443 - INFO - 开始 ECAgent 电商客服模型训练（修复版本）...
+2025-07-13 23:27:50,443 - INFO - 开始加载 Andyrasika/Ecommerce_FAQ 数据集...
+2025-07-13 23:27:58,280 - INFO - 数据集加载成功，总计 79 条记录
+2025-07-13 23:27:58,281 - INFO - 数据处理完成，有效记录 79 条
+2025-07-13 23:27:58,282 - INFO - 数据保存至: ./data/ecommerce_faq_train.json
+2025-07-13 23:27:58,282 - INFO - 开始模型微调（修复版本）...
+2025-07-13 23:27:58,282 - INFO - Loading model: Qwen/Qwen-7B-Chat
+2025-07-13 23:28:00,335 - INFO - 开始修复 pad_token 问题...
+2025-07-13 23:28:00,335 - INFO - Set pad_token to eos_token: None
+2025-07-13 23:28:00,335 - INFO - Set pad_token_id to eos_token_id: None
+2025-07-13 23:28:00,336 - INFO - Added special pad_token for Qwen model
+2025-07-13 23:28:00,336 - INFO - Final tokenizer pad_token: <|endoftext|>
+2025-07-13 23:28:00,336 - INFO - Final tokenizer pad_token_id: 151643
+2025-07-13 23:28:00,338 - INFO - ✅ Padding test passed!
+2025-07-13 23:28:02,014 - WARNING - 量化依赖不可用，使用普通模型
+2025-07-13 23:28:18,845 - INFO - Model and tokenizer loaded successfully
+2025-07-13 23:28:18,846 - INFO - Using target modules: ['c_attn', 'c_proj', 'w1', 'w2']
+2025-07-13 23:28:19,068 - INFO - LoRA configuration applied successfully
+2025-07-13 23:28:19,068 - INFO - Loading dataset from: ./data/ecommerce_faq_train.json
+2025-07-13 23:28:19,069 - INFO - Loaded 79 training examples
+2025-07-13 23:28:28,640 - WARNING - Parameter 'function'=<bound method ECommerceFineTuner.tokenize_function of <__main__.FixedECommerceFineTuner object at 0x1166cf620>> of the transform datasets.arrow_dataset.Dataset._map_single couldn't be hashed properly, a random hash was used instead. Make sure your transforms and parameters are serializable with pickle or dill for the dataset fingerprinting and caching to work. If you reuse this transform, the caching mechanism will consider it to be different from the previous calls and recompute everything. This warning is only showed once. Subsequent hashing failures won't be showed.
