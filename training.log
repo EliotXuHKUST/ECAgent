@@ -1,0 +1,42 @@
+2025-07-13 21:30:00,462 - INFO - 开始 ECAgent 电商客服模型训练...
+2025-07-13 21:30:00,462 - INFO - 开始加载 Andyrasika/Ecommerce_FAQ 数据集...
+2025-07-13 21:30:19,769 - INFO - 数据集加载成功，总计 79 条记录
+2025-07-13 21:30:19,771 - INFO - 数据处理完成，有效记录 79 条
+2025-07-13 21:30:19,771 - INFO - 数据保存至: ./data/ecommerce_faq_train.json
+2025-07-13 21:30:19,772 - INFO - 开始模型微调...
+2025-07-13 21:30:19,772 - INFO - Loading model: Qwen/Qwen-7B-Chat
+2025-07-13 21:30:21,205 - ERROR - Training failed: This modeling file requires the following packages that were not found in your environment: tiktoken. Run `pip install tiktoken`
+2025-07-13 21:30:21,205 - ERROR - 模型训练失败: This modeling file requires the following packages that were not found in your environment: tiktoken. Run `pip install tiktoken`
+2025-07-13 21:30:21,205 - ERROR - 训练过程失败: This modeling file requires the following packages that were not found in your environment: tiktoken. Run `pip install tiktoken`
+2025-07-13 21:31:57,523 - INFO - 开始 ECAgent 电商客服模型训练...
+2025-07-13 21:31:57,523 - INFO - 开始加载 Andyrasika/Ecommerce_FAQ 数据集...
+2025-07-13 21:32:10,808 - INFO - 数据集加载成功，总计 79 条记录
+2025-07-13 21:32:10,812 - INFO - 数据处理完成，有效记录 79 条
+2025-07-13 21:32:10,812 - INFO - 数据保存至: ./data/ecommerce_faq_train.json
+2025-07-13 21:32:10,812 - INFO - 开始模型微调...
+2025-07-13 21:32:10,812 - INFO - Loading model: Qwen/Qwen-7B-Chat
+2025-07-13 21:32:24,844 - ERROR - Training failed: This modeling file requires the following packages that were not found in your environment: einops, transformers_stream_generator. Run `pip install einops transformers_stream_generator`
+2025-07-13 21:32:24,844 - ERROR - 模型训练失败: This modeling file requires the following packages that were not found in your environment: einops, transformers_stream_generator. Run `pip install einops transformers_stream_generator`
+2025-07-13 21:32:24,844 - ERROR - 训练过程失败: This modeling file requires the following packages that were not found in your environment: einops, transformers_stream_generator. Run `pip install einops transformers_stream_generator`
+2025-07-13 21:32:51,641 - INFO - 开始 ECAgent 电商客服模型训练...
+2025-07-13 21:32:51,642 - INFO - 开始加载 Andyrasika/Ecommerce_FAQ 数据集...
+2025-07-13 21:33:04,575 - INFO - 数据集加载成功，总计 79 条记录
+2025-07-13 21:33:04,578 - INFO - 数据处理完成，有效记录 79 条
+2025-07-13 21:33:04,578 - INFO - 数据保存至: ./data/ecommerce_faq_train.json
+2025-07-13 21:33:04,578 - INFO - 开始模型微调...
+2025-07-13 21:33:04,578 - INFO - Loading model: Qwen/Qwen-7B-Chat
+2025-07-13 21:33:10,608 - ERROR - Training failed: The installed version of bitsandbytes (<0.43.1) requires CUDA, but CUDA is not available. You may need to install PyTorch with CUDA support or upgrade bitsandbytes to >=0.43.1.
+2025-07-13 21:33:10,608 - ERROR - 模型训练失败: The installed version of bitsandbytes (<0.43.1) requires CUDA, but CUDA is not available. You may need to install PyTorch with CUDA support or upgrade bitsandbytes to >=0.43.1.
+2025-07-13 21:33:10,608 - ERROR - 训练过程失败: The installed version of bitsandbytes (<0.43.1) requires CUDA, but CUDA is not available. You may need to install PyTorch with CUDA support or upgrade bitsandbytes to >=0.43.1.
+2025-07-13 21:33:56,096 - INFO - 开始 ECAgent 电商客服模型训练...
+2025-07-13 21:33:56,096 - INFO - 开始加载 Andyrasika/Ecommerce_FAQ 数据集...
+2025-07-13 21:34:22,374 - INFO - 数据集加载成功，总计 79 条记录
+2025-07-13 21:34:22,391 - INFO - 数据处理完成，有效记录 79 条
+2025-07-13 21:34:22,391 - INFO - 数据保存至: ./data/ecommerce_faq_train.json
+2025-07-13 21:34:22,391 - INFO - 开始模型微调...
+2025-07-13 21:34:22,391 - INFO - Loading model: Qwen/Qwen-7B-Chat
+2025-07-13 22:30:18,976 - WARNING - Some parameters are on the meta device because they were offloaded to the disk.
+2025-07-13 22:30:18,976 - INFO - Model and tokenizer loaded successfully
+2025-07-13 22:30:18,980 - ERROR - Training failed: Target modules {'k_proj', 'q_proj', 'o_proj', 'v_proj', 'up_proj', 'gate_proj', 'down_proj'} not found in the base model. Please check the target modules and try again.
+2025-07-13 22:30:18,980 - ERROR - 模型训练失败: Target modules {'k_proj', 'q_proj', 'o_proj', 'v_proj', 'up_proj', 'gate_proj', 'down_proj'} not found in the base model. Please check the target modules and try again.
+2025-07-13 22:30:18,980 - ERROR - 训练过程失败: Target modules {'k_proj', 'q_proj', 'o_proj', 'v_proj', 'up_proj', 'gate_proj', 'down_proj'} not found in the base model. Please check the target modules and try again.
