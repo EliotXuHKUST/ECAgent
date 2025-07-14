@@ -223,6 +223,19 @@ class ECommerceFineTuner:
                                 **kwargs) -> TrainingArguments:
         """创建训练参数"""
         
+        # 处理可能的参数冲突
+        has_eval_dataset = kwargs.get('eval_dataset') is not None
+        
+        # 从kwargs中移除可能冲突的参数，使用我们自己的逻辑
+        kwargs_clean = kwargs.copy()
+        conflicting_params = [
+            'load_best_model_at_end', 'metric_for_best_model', 'greater_is_better',
+            'evaluation_strategy', 'eval_strategy', 'eval_steps', 'save_strategy'
+        ]
+        
+        for param in conflicting_params:
+            kwargs_clean.pop(param, None)
+        
         return TrainingArguments(
             output_dir=self.output_dir,
             num_train_epochs=num_train_epochs,
@@ -233,11 +246,12 @@ class ECommerceFineTuner:
             weight_decay=weight_decay,
             logging_steps=logging_steps,
             save_steps=save_steps,
-            evaluation_strategy="steps" if kwargs.get('eval_dataset') else "no",
-            eval_steps=save_steps if kwargs.get('eval_dataset') else None,
+            eval_strategy="steps" if has_eval_dataset else "no",
+            eval_steps=save_steps if has_eval_dataset else None,
+            save_strategy="steps",
             save_total_limit=3,
-            load_best_model_at_end=True if kwargs.get('eval_dataset') else False,
-            metric_for_best_model="eval_loss" if kwargs.get('eval_dataset') else None,
+            load_best_model_at_end=True if has_eval_dataset else False,
+            metric_for_best_model="eval_loss" if has_eval_dataset else None,
             greater_is_better=False,
             warmup_steps=warmup_steps,
             max_steps=max_steps,
@@ -247,7 +261,7 @@ class ECommerceFineTuner:
             remove_unused_columns=False,
             report_to=None,
             run_name=f"ecommerce_finetune_{int(time.time())}" if 'time' in globals() else "ecommerce_finetune",
-            **kwargs
+            **kwargs_clean
         )
     
     def train(self, 
