@@ -30,8 +30,8 @@ class ECAgentUI:
         self.session_id = str(uuid.uuid4())
         
         # 设置日志
-        logging.basicConfig(level=logging.INFO)
-        self.logger = logging.getLogger(__name__)
+        from config.logging_config import get_logger
+        self.logger = get_logger(__name__)
         
         # 界面状态
         self.conversation_history = []

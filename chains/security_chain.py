@@ -9,6 +9,7 @@ import logging
 from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
 from pathlib import Path
+from filelock import FileLock
 
 # 处理依赖包可能未安装的情况
 try:
@@ -379,14 +380,16 @@ class SecurityFilterChain:
             self.logger.error(f"Error writing audit log: {e}")
     
     def add_sensitive_word(self, word: str) -> bool:
-        """添加敏感词"""
+        """添加敏感词（带文件锁保护）"""
         try:
             if word not in self.sensitive_words:
                 self.sensitive_words.append(word)
                 
-                # 更新文件
-                with open(self.sensitive_words_path, 'a', encoding='utf-8') as f:
-                    f.write(f'\n{word}')
+                # 使用文件锁保护并发写入
+                lock_file = self.sensitive_words_path + ".lock"
+                with FileLock(lock_file):
+                    with open(self.sensitive_words_path, 'a', encoding='utf-8') as f:
+                        f.write(f'\n{word}')
                 
                 self.logger.info(f"Added sensitive word: {word}")
                 return True
@@ -396,15 +399,17 @@ class SecurityFilterChain:
             return False
     
     def remove_sensitive_word(self, word: str) -> bool:
-        """移除敏感词"""
+        """移除敏感词（带文件锁保护）"""
         try:
             if word in self.sensitive_words:
                 self.sensitive_words.remove(word)
                 
-                # 更新文件
-                with open(self.sensitive_words_path, 'w', encoding='utf-8') as f:
-                    for w in self.sensitive_words:
-                        f.write(f'{w}\n')
+                # 使用文件锁保护并发写入
+                lock_file = self.sensitive_words_path + ".lock"
+                with FileLock(lock_file):
+                    with open(self.sensitive_words_path, 'w', encoding='utf-8') as f:
+                        for w in self.sensitive_words:
+                            f.write(f'{w}\n')
                 
                 self.logger.info(f"Removed sensitive word: {word}")
                 return True

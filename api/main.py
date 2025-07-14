@@ -107,12 +107,10 @@ async def startup_event():
     """应用启动事件"""
     global rag_chain, security_chain, session_manager
     
-    # 设置日志
-    logging.basicConfig(
-        level=getattr(logging, settings.data.log_level),
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
-    logger = logging.getLogger(__name__)
+    # 设置统一日志配置
+    from config.logging_config import setup_logging, get_logger
+    setup_logging()
+    logger = get_logger(__name__)
     
     try:
         logger.info("Starting ECAgent API service...")
@@ -190,7 +188,7 @@ def get_session_manager_instance():
 
 
 # API路由
-if DEPENDENCIES_AVAILABLE:
+if DEPENDENCIES_AVAILABLE and app is not None:
     
     @app.get("/health")
     async def health_check():

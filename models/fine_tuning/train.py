@@ -48,8 +48,8 @@ class ECommerceFineTuner:
         self.output_dir = output_dir
         
         # 设置日志
-        logging.basicConfig(level=logging.INFO)
-        self.logger = logging.getLogger(__name__)
+        from config.logging_config import get_logger
+        self.logger = get_logger(__name__)
         
         # 模型组件
         self.tokenizer = None

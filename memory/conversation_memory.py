@@ -8,6 +8,7 @@ import logging
 from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime, timedelta
 from pathlib import Path
+from filelock import FileLock
 
 # 处理依赖包可能未安装的情况
 try:
@@ -51,14 +52,18 @@ class ECommerceConversationMemory:
         self._load_sessions()
     
     def _load_sessions(self):
-        """加载已有会话"""
+        """加载已有会话（带文件锁保护）"""
         try:
             sessions_file = Path(self.persist_directory) / "sessions.json"
+            lock_file = str(sessions_file) + ".lock"
+            
             if sessions_file.exists():
-                with open(sessions_file, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                    self.sessions = data.get('sessions', {})
-                    self.session_metadata = data.get('metadata', {})
+                # 使用文件锁保护并发读取
+                with FileLock(lock_file):
+                    with open(sessions_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                        self.sessions = data.get('sessions', {})
+                        self.session_metadata = data.get('metadata', {})
                 
                 self.logger.info(f"Loaded {len(self.sessions)} sessions")
         except Exception as e:
@@ -67,17 +72,21 @@ class ECommerceConversationMemory:
             self.session_metadata = {}
     
     def _save_sessions(self):
-        """保存会话到文件"""
+        """保存会话到文件（带文件锁保护）"""
         try:
             sessions_file = Path(self.persist_directory) / "sessions.json"
+            lock_file = str(sessions_file) + ".lock"
+            
             data = {
                 'sessions': self.sessions,
                 'metadata': self.session_metadata,
                 'saved_at': time.time()
             }
             
-            with open(sessions_file, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
+            # 使用文件锁保护并发写入
+            with FileLock(lock_file):
+                with open(sessions_file, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
                 
         except Exception as e:
             self.logger.error(f"Error saving sessions: {e}")

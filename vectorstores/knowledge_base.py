@@ -46,11 +46,8 @@ class KnowledgeBaseBuilder:
     
     def setup_logging(self):
         """设置日志"""
-        logging.basicConfig(
-            level=getattr(logging, self.settings.data.log_level),
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-        )
-        self.logger = logging.getLogger(__name__)
+        from config.logging_config import get_logger
+        self.logger = get_logger(__name__)
     
     def get_text_splitter(self, 
                          splitter_type: str = "recursive",
