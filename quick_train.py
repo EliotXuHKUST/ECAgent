@@ -24,38 +24,44 @@ logger = logging.getLogger(__name__)
 
 def quick_train():
     """
-    快速训练配置 - 适合GPU服务器测试
+    快速训练配置 - 适合CPU环境测试
     """
-    logger.info("开始快速训练模式（GPU服务器）...")
+    logger.info("开始快速训练模式（CPU环境）...")
     
     try:
-        # 1. 加载少量数据进行快速测试
+        # 修改环境配置以适应CPU环境
+        update_env_config({
+            "USE_GPU": False,
+            "MAX_SAMPLES": 20,  # 减少样本数量以加快训练
+            "MAX_EPOCHS": 1     # 减少训练轮数
+        })
+        
+        logger.info("开始加载 Andyrasika/Ecommerce_FAQ 数据集...")
+        # 数据处理 - 使用更少的样本进行快速训练
         data_path = load_and_process_ecommerce_faq(
             output_path="./data/ecommerce_faq_quick.json",
-            max_samples=200  # 使用200个样本进行快速训练
+            max_samples=20  # 使用20个样本进行快速训练
         )
         
-        # 2. 快速训练配置
+        logger.info("开始模型微调...")
         model_path = train_ecommerce_model(
             data_path=data_path,
-            model_name="Qwen/Qwen-7B-Chat",
-            output_dir="./models/fine_tuned_quick",
-            num_epochs=1,  # 只训练1个epoch
-            batch_size=4,  # GPU服务器可以使用更大的批次
-            learning_rate=3e-4,
-            use_quantization=True  # 启用量化节省GPU内存
+            output_dir="./models/quick_tuned",
+            num_epochs=1,
+            batch_size=1,
+            learning_rate=5e-5,
+            use_quantization=False  # 在CPU环境下禁用量化
         )
         
         # 3. 更新配置
         update_env_config(model_path)
         
-        logger.info("=" * 60)
-        logger.info("快速训练完成！")
-        logger.info(f"模型保存位置: {model_path}")
-        logger.info("可以通过以下方式测试：")
-        logger.info("1. 重启 ECAgent 服务")
-        logger.info("2. 或直接运行 python simple_start.py")
-        logger.info("=" * 60)
+        logger.info(f"快速训练完成！模型保存在: {model_path}")
+        logger.info("可以使用以下方式测试模型:")
+        logger.info("1. python test_quick_model.py")
+        logger.info("2. python gradio_app.py")
+        
+        return model_path
         
     except Exception as e:
         logger.error(f"快速训练失败: {e}")

@@ -1,0 +1,12 @@
+2025-07-29 02:55:31 - config.logging_config - INFO - Logging initialized - Level: INFO, File: ./logs/app.log
+2025-07-29 02:55:31 - models.fine_tuning.train - INFO - Loading model: Qwen/Qwen-7B-Chat
+2025-07-29 02:55:32 - models.fine_tuning.train - ERROR - Training failed: This modeling file requires the following packages that were not found in your environment: tiktoken. Run `pip install tiktoken`
+2025-07-29 02:55:32 - train_ecommerce_faq - ERROR - 模型训练失败: This modeling file requires the following packages that were not found in your environment: tiktoken. Run `pip install tiktoken`
+2025-07-29 02:55:32 - __main__ - ERROR - 快速训练失败: This modeling file requires the following packages that were not found in your environment: tiktoken. Run `pip install tiktoken`
+2025-07-29 02:56:28 - config.logging_config - INFO - Logging initialized - Level: INFO, File: ./logs/app.log
+2025-07-29 02:56:28 - models.fine_tuning.train - INFO - Loading model: Qwen/Qwen-7B-Chat
+2025-07-29 02:56:29 - models.fine_tuning.train - ERROR - Training failed: This modeling file requires the following packages that were not found in your environment: einops, transformers_stream_generator. Run `pip install einops transformers_stream_generator`
+2025-07-29 02:56:29 - train_ecommerce_faq - ERROR - 模型训练失败: This modeling file requires the following packages that were not found in your environment: einops, transformers_stream_generator. Run `pip install einops transformers_stream_generator`
+2025-07-29 02:56:29 - __main__ - ERROR - 快速训练失败: This modeling file requires the following packages that were not found in your environment: einops, transformers_stream_generator. Run `pip install einops transformers_stream_generator`
+2025-07-29 02:57:25 - config.logging_config - INFO - Logging initialized - Level: INFO, File: ./logs/app.log
+2025-07-29 02:57:25 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"

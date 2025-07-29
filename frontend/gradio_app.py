@@ -3,6 +3,13 @@ Gradio前端界面
 提供聊天界面和系统管理功能
 """
 import os
+import sys
+from pathlib import Path
+
+# 添加项目根目录到Python路径
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
 import json
 import time
 import uuid
@@ -288,11 +295,10 @@ class ECAgentUI:
         }
         """
         
-        with gr.Blocks(
-            title=self.settings.frontend.ui_title,
-            theme=gr.themes.Soft(),
-            css=custom_css
-        ) as demo:
+        # 创建界面
+        demo = gr.Blocks(title="ECAgent - 电商客服助手", theme=gr.themes.Default())
+        
+        with demo:
             
             # 标题和描述
             gr.Markdown(f"# {self.settings.frontend.ui_title}")
@@ -304,15 +310,15 @@ class ECAgentUI:
                 with gr.TabItem("💬 智能客服"):
                     with gr.Row():
                         with gr.Column(scale=3):
-                            # 主聊天界面
-                            chatbot = gr.Chatbot(
-                                [],
-                                elem_id="chatbot",
-                                height=500,
-                                bubble_full_width=False,
-                                avatar_images=("👤", "🤖"),
-                                show_copy_button=True
-                            )
+                                                          # 主聊天界面
+                              chatbot = gr.Chatbot(
+                                  [],
+                                  elem_id="chatbot",
+                                  height=500,
+                                  type="messages",
+                                  avatar_images=("👤", "🤖"),
+                                  show_copy_button=True
+                              )
                             
                             with gr.Row():
                                 msg = gr.Textbox(
@@ -503,13 +509,6 @@ class ECAgentUI:
             cleanup_btn.click(
                 self.cleanup_sessions,
                 outputs=cleanup_result
-            )
-            
-            # 定期检查API状态
-            demo.load(
-                self.check_api_health,
-                outputs=health_status,
-                every=30
             )
             
             # 启动时获取会话信息
